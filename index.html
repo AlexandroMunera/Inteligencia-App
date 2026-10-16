@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inteligencia · Encuentra tus beneficios</title>
+<meta name="description" content="Inteligencia encuentra los beneficios que te corresponden: salud, educación, transporte, vivienda y más. Muy pronto.">
+<meta property="og:title" content="Inteligencia">
+<meta property="og:description" content="Encuentra todos tus beneficios en un solo lugar. Muy pronto.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Ccircle cx='16' cy='17' r='11' fill='none' stroke='%237af5e1' stroke-width='2'/%3E%3Crect x='14' y='14' width='4' height='10' rx='2' fill='%237af5e1'/%3E%3Ccircle cx='16' cy='6' r='3' fill='%237af5e1'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#05070d;
+    --ink:#e8f1ff;
+    --muted:#7d8aa3;
+    --accent:#7af5e1;
+    --accent-2:#8fa8ff;
+    --line:rgba(122,245,225,.22);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { height:100%; }
+  body {
+    min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'Sora',sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; position:relative;
+  }
+
+  /* Fondo: cuadrícula que se mueve un poco con el ratón */
+  .grid {
+    position:absolute; inset:-60px;
+    background-image:
+      linear-gradient(rgba(122,245,225,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(122,245,225,.06) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(circle at center, #000 25%, transparent 72%);
+    -webkit-mask-image:radial-gradient(circle at center, #000 25%, transparent 72%);
+    transition:transform .4s ease-out;
+  }
+
+  /* Sistema de órbitas: cada punto es un beneficio "encontrado" */
+  .orbits {
+    position:absolute; top:50%; left:50%;
+    width:0; height:0; pointer-events:none;
+  }
+  .ring {
+    position:absolute; border-radius:50%;
+    border:1px solid var(--line);
+    top:50%; left:50%;
+    animation:spin linear infinite;
+  }
+  .ring.r1 { width:min(560px,92vw); height:min(560px,92vw); margin:calc(min(560px,92vw)/-2) 0 0 calc(min(560px,92vw)/-2); animation-duration:48s; }
+  .ring.r2 { width:min(760px,130vw); height:min(760px,130vw); margin:calc(min(760px,130vw)/-2) 0 0 calc(min(760px,130vw)/-2); animation-duration:80s; animation-direction:reverse; border-style:dashed; border-color:rgba(143,168,255,.16); }
+  .dot {
+    position:absolute; width:10px; height:10px; border-radius:50%;
+    background:var(--accent); box-shadow:0 0 18px var(--accent);
+  }
+  .r1 .dot.a { top:-5px; left:calc(50% - 5px); }
+  .r1 .dot.b { bottom:14%; right:4%; width:6px; height:6px; background:var(--accent-2); box-shadow:0 0 12px var(--accent-2); }
+  .r2 .dot.a { top:22%; left:5%; width:7px; height:7px; }
+  .r2 .dot.b { bottom:-4px; left:48%; width:5px; height:5px; background:var(--accent-2); box-shadow:0 0 10px var(--accent-2); }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  /* Contenido */
+  main {
+    position:relative; z-index:1; text-align:center;
+    padding:24px; width:min(620px,100%);
+  }
+  .status {
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:.85rem; color:var(--accent);
+    padding:6px 14px; border:1px solid var(--line); border-radius:999px;
+    background:rgba(5,7,13,.6);
+  }
+  .pulse {
+    width:8px; height:8px; border-radius:50%; background:var(--accent);
+    animation:pulse 2s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow:0 0 0 0 rgba(122,245,225,.6); }
+    100% { box-shadow:0 0 0 10px rgba(122,245,225,0); }
+  }
+
+  .mark {
+    display:block; width:clamp(56px,10vw,76px); height:auto;
+    margin:28px auto 0;
+  }
+  h1 {
+    font-weight:300; font-size:clamp(2.8rem,9vw,5.4rem);
+    letter-spacing:.02em; margin:16px 0 14px; line-height:1;
+  }
+
+  .lead {
+    color:var(--muted); font-size:clamp(1rem,2.6vw,1.2rem); line-height:1.6;
+    min-height:3.2em;
+  }
+  .lead .word {
+    color:var(--ink); font-weight:400;
+    border-bottom:1px solid var(--accent);
+    padding-bottom:2px;
+  }
+  .caret {
+    display:inline-block; width:2px; height:1.05em; background:var(--accent);
+    vertical-align:-0.15em; margin-left:2px;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity:0; } }
+
+  form {
+    display:flex; gap:8px; margin:30px auto 0; width:min(340px, 72vw);
+    padding:6px; border:1px solid var(--line); border-radius:999px;
+    background:rgba(5,7,13,.7);
+  }
+  .note { max-width:min(340px, 72vw); margin-left:auto; margin-right:auto; }
+  input {
+    flex:1; min-width:0; padding:11px 14px; border:0; border-radius:999px;
+    background:transparent; color:var(--ink); font:inherit; font-size:.95rem;
+  }
+  input::placeholder { color:var(--muted); }
+  input:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button {
+    padding:11px 18px; border:0; border-radius:999px; cursor:pointer; white-space:nowrap;
+    font:inherit; font-weight:600; font-size:.95rem;
+    color:var(--bg); background:var(--accent);
+    transition:box-shadow .2s ease;
+  }
+  button:hover { box-shadow:0 0 22px rgba(122,245,225,.55); }
+  button:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+
+  .note { margin-top:16px; font-size:.85rem; color:var(--muted); min-height:1.4em; }
+  .note.ok { color:var(--accent); }
+
+  footer {
+    position:absolute; bottom:22px; left:0; right:0; text-align:center;
+    font-size:.78rem; color:var(--muted); opacity:.7; z-index:1;
+  }
+
+  @media (max-width:480px) {
+    form { flex-direction:column; border-radius:22px; }
+    button { width:100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ring, .pulse, .caret { animation:none; }
+    .grid { transition:none; }
+  }
+</style>
+</head>
+<body>
+  <div class="grid" id="grid"></div>
+
+  <div class="orbits" aria-hidden="true">
+    <div class="ring r1"><span class="dot a"></span><span class="dot b"></span></div>
+    <div class="ring r2"><span class="dot a"></span><span class="dot b"></span></div>
+  </div>
+
+  <main>
+    <span class="status"><span class="pulse"></span>Muy pronto</span>
+    <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="54" r="40" fill="none" stroke="#7af5e1" stroke-width="3"/>
+      <rect x="44" y="42" width="12" height="36" rx="6" fill="#7af5e1"/>
+      <circle cx="50" cy="14" r="8" fill="#7af5e1"/>
+    </svg>
+    <h1>Inteligencia</h1>
+    <p class="lead">
+      Descubre los beneficios de <span class="word" id="word">salud</span><span class="caret"></span><br>
+      que ya te corresponden y quizás no conoces.
+    </p>
+
+    <form id="form" novalidate>
+      <input type="email" id="email" placeholder="tu@correo.com" aria-label="Correo electrónico" autocomplete="email" required>
+      <button type="submit">Avisarme</button>
+    </form>
+    <p class="note" id="note" role="status">Te escribimos una sola vez: el día del lanzamiento.</p>
+  </main>
+
+  <footer>© 2026 Inteligencia · inteligenciaapp.com</footer>
+
+  <script>
+    // Palabra que cambia: categorías de beneficios
+    const words = [
+      "salud", "educación", "transporte", "vivienda", "empleo", "descuentos",
+      "becas", "pensiones", "alimentación", "seguros", "familia", "maternidad",
+      "discapacidad", "créditos", "impuestos", "viajes", "cultura", "deporte",
+      "tecnología", "servicios básicos", "emprendimiento", "adultos mayores"
+    ];
+    const wordEl = document.getElementById("word");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let w = 0;
+
+    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function cycle() {
+      if (reduce) {
+        setInterval(() => { w = (w + 1) % words.length; wordEl.textContent = words[w]; }, 2200);
+        return;
+      }
+      while (true) {
+        await sleep(1800);
+        const current = words[w];
+        for (let i = current.length; i >= 0; i--) { wordEl.textContent = current.slice(0, i); await sleep(45); }
+        w = (w + 1) % words.length;
+        const next = words[w];
+        for (let i = 1; i <= next.length; i++) { wordEl.textContent = next.slice(0, i); await sleep(75); }
+      }
+    }
+    cycle();
+
+    // Cuadrícula con movimiento suave según el ratón
+    const grid = document.getElementById("grid");
+    if (!reduce) {
+      window.addEventListener("mousemove", e => {
+        const x = (e.clientX / window.innerWidth - .5) * 20;
+        const y = (e.clientY / window.innerHeight - .5) * 20;
+        grid.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    }
+
+    // Formulario de aviso (sin servidor todavía)
+    const form = document.getElementById("form");
+    const email = document.getElementById("email");
+    const note = document.getElementById("note");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const value = email.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      if (!valid) {
+        note.textContent = "Escribe un correo válido, por ejemplo nombre@correo.com.";
+        note.classList.remove("ok");
+        email.focus();
+        return;
+      }
+      // Aquí puedes conectar un servicio como Formspree o Mailchimp.
+      note.textContent = "Listo. Te avisaremos cuando Inteligencia esté disponible.";
+      note.classList.add("ok");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
