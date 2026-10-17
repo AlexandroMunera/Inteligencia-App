@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apoya a Inteligencia</title>
+<meta name="description" content="Apoya el desarrollo de Inteligencia con una donación.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2305070d'/%3E%3Ccircle cx='16' cy='17' r='11' fill='none' stroke='%237af5e1' stroke-width='2'/%3E%3Crect x='14' y='14' width='4' height='10' rx='2' fill='%237af5e1'/%3E%3Ccircle cx='16' cy='6' r='3' fill='%237af5e1'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#05070d;
+    --ink:#e8f1ff;
+    --muted:#7d8aa3;
+    --accent:#7af5e1;
+    --line:rgba(122,245,225,.22);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body {
+    min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'Sora',sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    background-image:
+      linear-gradient(rgba(122,245,225,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(122,245,225,.06) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+  main { text-align:center; padding:24px; width:min(540px,100%); }
+  h1 { font-weight:300; font-size:clamp(2rem,7vw,3rem); line-height:1.1; margin-bottom:14px; }
+  .lead { color:var(--muted); line-height:1.6; margin-bottom:30px; }
+  .options { display:flex; flex-direction:column; gap:12px; }
+  .option {
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:16px 20px; border:1px solid var(--line); border-radius:16px;
+    background:rgba(5,7,13,.8); color:var(--ink); text-decoration:none; text-align:left;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .option:hover { border-color:var(--accent); box-shadow:0 0 18px rgba(122,245,225,.25); }
+  .option:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  .option strong { display:block; font-weight:600; }
+  .option small { color:var(--muted); font-size:.82rem; }
+  .option .arrow { color:var(--accent); font-size:1.2rem; }
+  .back { display:inline-block; margin-top:28px; color:var(--muted); font-size:.88rem; text-decoration:none; }
+  .back:hover { color:var(--accent); }
+</style>
+</head>
+<body>
+  <main>
+    <h1>☕ Invítame un café</h1>
+    <p class="lead">Inteligencia es un proyecto independiente. Si te gusta la idea, puedes apoyarlo con el medio que prefieras.</p>
+
+    <!-- PENDIENTE: reemplazar cada href="#" por tu enlace real -->
+    <div class="options">
+      <a class="option" href="#" target="_blank" rel="noopener">
+        <span><strong>Vaki</strong><small>Pesos colombianos, PSE y tarjetas</small></span><span class="arrow">→</span>
+      </a>
+      <a class="option" href="#" target="_blank" rel="noopener">
+        <span><strong>Buy Me a Coffee</strong><small>Tarjeta internacional</small></span><span class="arrow">→</span>
+      </a>
+      <a class="option" href="#" target="_blank" rel="noopener">
+        <span><strong>Ko-fi</strong><small>Tarjeta o PayPal</small></span><span class="arrow">→</span>
+      </a>
+    </div>
+
+    <a class="back" href="/">← Volver a Inteligencia</a>
+  </main>
+</body>
+</html>
