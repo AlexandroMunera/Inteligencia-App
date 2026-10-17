@@ -131,14 +131,32 @@
   .note { margin-top:16px; font-size:.85rem; color:var(--muted); min-height:1.4em; }
   .note.ok { color:var(--accent); }
 
+  .coffee {
+    display:inline-flex; align-items:center; gap:8px; margin-top:22px;
+    padding:9px 16px; border:1px solid var(--line); border-radius:999px;
+    color:var(--muted); font-size:.85rem; text-decoration:none;
+    background:rgba(5,7,13,.6);
+    transition:border-color .2s ease, box-shadow .2s ease, color .2s ease;
+  }
+  .coffee svg { width:14px; height:14px; fill:none; stroke:var(--accent); stroke-width:2; stroke-linejoin:round; }
+  .coffee:hover { border-color:var(--accent); color:var(--accent); box-shadow:0 0 18px rgba(122,245,225,.25); }
+  .coffee:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+
   footer {
     position:absolute; bottom:22px; left:0; right:0; text-align:center;
     font-size:.78rem; color:var(--muted); opacity:.7; z-index:1;
   }
 
   @media (max-width:480px) {
-    form { flex-direction:column; border-radius:22px; }
-    button { width:100%; }
+    /* En móvil el formulario queda en una fila compacta, dentro de la órbita */
+    form { width:min(270px, 68vw); gap:4px; padding:4px; }
+    input { padding:9px 10px; font-size:.88rem; }
+    button { padding:9px 12px; font-size:.88rem; }
+    /* Órbitas más amplias para que rodeen el contenido sin cruzar el texto */
+    .ring.r1 { width:150vw; height:150vw; margin:-75vw 0 0 -75vw; }
+    .ring.r2 { width:175vw; height:175vw; margin:-87.5vw 0 0 -87.5vw; }
+    /* En pantallas bajas la órbita exterior pasa detrás del pie, no sobre el texto */
+    footer span { background:var(--bg); padding:4px 10px; border-radius:999px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ring, .pulse, .caret { animation:none; }
@@ -171,10 +189,15 @@
       <input type="email" id="email" placeholder="tu@correo.com" aria-label="Correo electrónico" autocomplete="email" required>
       <button type="submit">Avisarme</button>
     </form>
-    <p class="note" id="note" role="status">Te escribimos una sola vez: el día del lanzamiento.</p>
+    <p class="note" id="note" role="status">Te escribimos una sola vez.</p>
+
+    <a class="coffee" href="/apoyar/">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+      Apoya el proyecto
+    </a>
   </main>
 
-  <footer>© 2026 Inteligencia · inteligenciaapp.com</footer>
+  <footer><span>© 2026 Inteligencia · inteligenciaapp.com</span></footer>
 
   <script>
     // Palabra que cambia: categorías de beneficios
