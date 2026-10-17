@@ -131,6 +131,16 @@
   .note { margin-top:16px; font-size:.85rem; color:var(--muted); min-height:1.4em; }
   .note.ok { color:var(--accent); }
 
+  .coffee {
+    display:inline-flex; align-items:center; gap:8px; margin-top:22px;
+    padding:9px 16px; border:1px solid var(--line); border-radius:999px;
+    color:var(--ink); font-size:.88rem; text-decoration:none;
+    background:rgba(5,7,13,.7);
+    transition:border-color .2s ease, box-shadow .2s ease, color .2s ease;
+  }
+  .coffee:hover { border-color:var(--accent); color:var(--accent); box-shadow:0 0 18px rgba(122,245,225,.25); }
+  .coffee:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+
   footer {
     position:absolute; bottom:22px; left:0; right:0; text-align:center;
     font-size:.78rem; color:var(--muted); opacity:.7; z-index:1;
@@ -172,6 +182,9 @@
       <button type="submit">Avisarme</button>
     </form>
     <p class="note" id="note" role="status">Te escribimos una sola vez: el día del lanzamiento.</p>
+
+    <!-- PENDIENTE: reemplazar href="#" por tu enlace de Buy Me a Coffee, Ko-fi u otro -->
+    <a class="coffee" href="#" target="_blank" rel="noopener">☕ Invítame un café</a>
   </main>
 
   <footer>© 2026 Inteligencia · inteligenciaapp.com</footer>
