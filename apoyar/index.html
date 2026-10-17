@@ -13,118 +13,40 @@
     --ink:#e8f1ff;
     --muted:#7d8aa3;
     --accent:#7af5e1;
-    --accent-2:#8fa8ff;
     --line:rgba(122,245,225,.22);
   }
   * { box-sizing:border-box; margin:0; padding:0; }
-  html, body { min-height:100%; }
   body {
     min-height:100vh; background:var(--bg); color:var(--ink);
     font-family:'Sora',sans-serif;
     display:flex; align-items:center; justify-content:center;
-    overflow-x:hidden; position:relative;
-  }
-
-  /* Fondo: mismo sistema de la portada */
-  .grid {
-    position:fixed; inset:-60px;
     background-image:
       linear-gradient(rgba(122,245,225,.06) 1px, transparent 1px),
       linear-gradient(90deg, rgba(122,245,225,.06) 1px, transparent 1px);
-    background-size:56px 56px;
-    mask-image:radial-gradient(circle at center, #000 25%, transparent 72%);
-    -webkit-mask-image:radial-gradient(circle at center, #000 25%, transparent 72%);
-    transition:transform .4s ease-out;
+    background-size:48px 48px;
   }
-  .orbits { position:fixed; top:50%; left:50%; width:0; height:0; pointer-events:none; }
-  .ring {
-    position:absolute; border-radius:50%; border:1px solid var(--line);
-    top:50%; left:50%; animation:spin linear infinite;
-  }
-  .ring.r1 { width:min(560px,92vw); height:min(560px,92vw); margin:calc(min(560px,92vw)/-2) 0 0 calc(min(560px,92vw)/-2); animation-duration:48s; }
-  .ring.r2 { width:min(760px,130vw); height:min(760px,130vw); margin:calc(min(760px,130vw)/-2) 0 0 calc(min(760px,130vw)/-2); animation-duration:80s; animation-direction:reverse; border-style:dashed; border-color:rgba(143,168,255,.16); }
-  .dot {
-    position:absolute; width:10px; height:10px; border-radius:50%;
-    background:var(--accent); box-shadow:0 0 18px var(--accent);
-  }
-  .r1 .dot.a { top:-5px; left:calc(50% - 5px); }
-  .r1 .dot.b { bottom:14%; right:4%; width:6px; height:6px; background:var(--accent-2); box-shadow:0 0 12px var(--accent-2); }
-  .r2 .dot.a { top:22%; left:5%; width:7px; height:7px; }
-  .r2 .dot.b { bottom:-4px; left:48%; width:5px; height:5px; background:var(--accent-2); box-shadow:0 0 10px var(--accent-2); }
-  @keyframes spin { to { transform:rotate(360deg); } }
-
-  main {
-    position:relative; z-index:1; text-align:center;
-    padding:48px 24px 72px; width:min(560px,100%);
-  }
-  .status {
-    display:inline-flex; align-items:center; gap:10px;
-    font-size:.85rem; color:var(--accent);
-    padding:6px 14px; border:1px solid var(--line); border-radius:999px;
-    background:rgba(5,7,13,.6);
-  }
-  .status svg { width:14px; height:14px; fill:none; stroke:var(--accent); stroke-width:2; stroke-linejoin:round; }
-  .mark { display:block; width:clamp(48px,9vw,60px); height:auto; margin:24px auto 0; }
-  h1 {
-    font-weight:300; font-size:clamp(2.2rem,7vw,3rem);
-    letter-spacing:.02em; margin:14px 0 14px; line-height:1.05;
-  }
-  .lead { color:var(--muted); font-size:clamp(.95rem,2.4vw,1.05rem); line-height:1.6; margin-bottom:28px; }
-
-  .options { display:flex; flex-direction:column; gap:10px; max-width:440px; margin:0 auto; }
+  main { text-align:center; padding:24px; width:min(540px,100%); }
+  h1 { font-weight:300; font-size:clamp(2rem,7vw,3rem); line-height:1.1; margin-bottom:14px; }
+  .lead { color:var(--muted); line-height:1.6; margin-bottom:30px; }
+  .options { display:flex; flex-direction:column; gap:12px; }
   .option {
-    display:flex; align-items:center; gap:14px;
-    padding:14px 18px; border:1px solid var(--line); border-radius:999px;
-    background:rgba(5,7,13,.7); color:var(--ink); text-decoration:none; text-align:left;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:16px 20px; border:1px solid var(--line); border-radius:16px;
+    background:rgba(5,7,13,.8); color:var(--ink); text-decoration:none; text-align:left;
     transition:border-color .2s ease, box-shadow .2s ease;
   }
-  .option::before {
-    content:""; flex:none; width:8px; height:8px; border-radius:50%;
-    background:var(--accent); box-shadow:0 0 12px var(--accent);
-  }
-  .option span { flex:1; }
-  .option strong { display:block; font-weight:600; font-size:.95rem; }
-  .option small { color:var(--muted); font-size:.8rem; }
-  .option .arrow { flex:none; color:var(--accent); transition:transform .2s ease; }
-  .option:hover { border-color:var(--accent); box-shadow:0 0 22px rgba(122,245,225,.25); }
-  .option:hover .arrow { transform:translateX(3px); }
+  .option:hover { border-color:var(--accent); box-shadow:0 0 18px rgba(122,245,225,.25); }
   .option:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
-
-  .back { display:inline-block; margin-top:26px; color:var(--muted); font-size:.85rem; text-decoration:none; }
+  .option strong { display:block; font-weight:600; }
+  .option small { color:var(--muted); font-size:.82rem; }
+  .option .arrow { color:var(--accent); font-size:1.2rem; }
+  .back { display:inline-block; margin-top:28px; color:var(--muted); font-size:.88rem; text-decoration:none; }
   .back:hover { color:var(--accent); }
-
-  footer {
-    position:absolute; bottom:22px; left:0; right:0; text-align:center;
-    font-size:.78rem; color:var(--muted); opacity:.7; z-index:1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ring { animation:none; }
-    .grid { transition:none; }
-  }
 </style>
 </head>
 <body>
-  <div class="grid" id="grid"></div>
-
-  <div class="orbits" aria-hidden="true">
-    <div class="ring r1"><span class="dot a"></span><span class="dot b"></span></div>
-    <div class="ring r2"><span class="dot a"></span><span class="dot b"></span></div>
-  </div>
-
   <main>
-    <span class="status">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
-      Donaciones
-    </span>
-    <a href="/" aria-label="Volver a Inteligencia">
-      <svg class="mark" viewBox="0 0 100 100" aria-hidden="true">
-        <circle cx="50" cy="54" r="40" fill="none" stroke="#7af5e1" stroke-width="3"/>
-        <rect x="44" y="42" width="12" height="36" rx="6" fill="#7af5e1"/>
-        <circle cx="50" cy="14" r="8" fill="#7af5e1"/>
-      </svg>
-    </a>
-    <h1>Apoya el proyecto</h1>
+    <h1>☕ Invítame un café</h1>
     <p class="lead">Inteligencia es un proyecto independiente. Si te gusta la idea, puedes apoyarlo con el medio que prefieras.</p>
 
     <!-- PENDIENTE: reemplazar cada href="#" por tu enlace real -->
@@ -142,19 +64,5 @@
 
     <a class="back" href="/">← Volver a Inteligencia</a>
   </main>
-
-  <footer>© 2026 Inteligencia · inteligenciaapp.com</footer>
-
-  <script>
-    // Cuadrícula con movimiento suave según el ratón
-    const grid = document.getElementById("grid");
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      window.addEventListener("mousemove", e => {
-        const x = (e.clientX / window.innerWidth - .5) * 20;
-        const y = (e.clientY / window.innerHeight - .5) * 20;
-        grid.style.transform = `translate(${x}px, ${y}px)`;
-      });
-    }
-  </script>
 </body>
 </html>
